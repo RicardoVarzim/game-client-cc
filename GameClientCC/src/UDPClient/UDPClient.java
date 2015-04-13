@@ -1,24 +1,30 @@
-package client;
+package UDPClient;
 
 import java.io.*; 
 import java.net.*; 
   
-class UDPClient { 
-    
-    public static void main(String args[]) throws Exception 
-    { 
-     try {
-        String serverHostname = new String ("127.0.0.1");
+public class UDPClient implements Runnable {
 
-        if (args.length > 0)
-           serverHostname = args[0];
+    protected String host;
+    
+    public UDPClient(){
+        host = new String("127.0.0.1");
+    }
+    public UDPClient(String host){
+        this.host = host;
+    }
+    
+    @Override
+    public void run() {
+        try {
+        
   
       BufferedReader inFromUser = 
         new BufferedReader(new InputStreamReader(System.in)); 
   
       DatagramSocket clientSocket = new DatagramSocket(); 
   
-      InetAddress IPAddress = InetAddress.getByName(serverHostname); 
+      InetAddress IPAddress = InetAddress.getByName(host); 
       System.out.println ("Attemping to connect to " + IPAddress + 
                           ") via UDP port 9876");
   
@@ -68,6 +74,5 @@ class UDPClient {
     }
    catch (IOException ex) {
      System.err.println(ex);
-    }
-  } 
+    }}
 } 
