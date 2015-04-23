@@ -1,78 +1,68 @@
 package UDPClient;
 
+import Commands.PDU;
 import java.io.*; 
 import java.net.*; 
+import java.util.logging.Level;
+import java.util.logging.Logger;
   
 public class UDPClient implements Runnable {
 
     protected String host;
+    private PDU message;
+    protected int port;
     
-    public UDPClient(){
+    public UDPClient(PDU message){
         host = new String("127.0.0.1");
+        port = 9874;
+        message = message;
     }
-    public UDPClient(String host){
+    public UDPClient(String host, int port, PDU message){
         this.host = host;
+        this.port = port;
+        this.message = message;
     }
     
     @Override
     public void run() {
         try {
-        
-  
-      BufferedReader inFromUser = 
-        new BufferedReader(new InputStreamReader(System.in)); 
-  
-      DatagramSocket clientSocket = new DatagramSocket(); 
-  
-      InetAddress IPAddress = InetAddress.getByName(host); 
-      System.out.println ("Attemping to connect to " + IPAddress + 
-                          ") via UDP port 9876");
-  
-      byte[] sendData = new byte[1024]; 
-      byte[] receiveData = new byte[1024]; 
-  
-      System.out.print("Enter Message: ");
-      String sentence = inFromUser.readLine(); 
-      sendData = sentence.getBytes();         
+            
+            // 
+            DatagramSocket clientSocket = new DatagramSocket(port); 
+            InetAddress IPAddress = InetAddress.getByName(host);           
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            ObjectOutputStream os = new ObjectOutputStream(outputStream);
+            os.writeObject(message);
+            byte[] sendData = outputStream.toByteArray();
+            DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9875);
 
-      System.out.println ("Sending data to " + sendData.length + 
-                          " bytes to server.");
-      DatagramPacket sendPacket = 
-         new DatagramPacket(sendData, sendData.length, IPAddress, 9876); 
-  
-      clientSocket.send(sendPacket); 
-  
-      DatagramPacket receivePacket = 
-         new DatagramPacket(receiveData, receiveData.length); 
-  
-      System.out.println ("Waiting for return packet");
-      clientSocket.setSoTimeout(10000);
+            clientSocket.send(sendPacket);
 
-      try {
-           clientSocket.receive(receivePacket); 
-           String modifiedSentence = 
-               new String(receivePacket.getData()); 
-  
-           InetAddress returnIPAddress = receivePacket.getAddress();
-     
-           int port = receivePacket.getPort();
+            byte[] receiveData = new byte[1024];
+            DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length); 
+            System.out.println ("Waiting for return packet");
+            clientSocket.setSoTimeout(10000);
+            clientSocket.receive(receivePacket);
+            
+            byte[] data = receivePacket.getData();
+            ByteArrayInputStream in = new ByteArrayInputStream(data);
+            ObjectInputStream is = new ObjectInputStream(in);
+            
+            try {
+                
+                PDU message = (PDU) is.readObject();
+                System.out.println("PDU object received = "+message);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(UDPClient.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
-           System.out.println ("From server at: " + returnIPAddress + 
-                               ":" + port);
-           System.out.println("Message: " + modifiedSentence); 
-
-          }
-      catch (SocketTimeoutException ste)
-          {
-           System.out.println ("Timeout Occurred: Packet assumed lost");
-      }
-  
-      clientSocket.close(); 
-     }
-   catch (UnknownHostException ex) { 
-     System.err.println(ex);
+            clientSocket.close(); 
+        }
+        catch (UnknownHostException ex) { 
+            System.err.println(ex);
+        }
+        catch (IOException ex) {
+            System.err.println(ex);
+        }
     }
-   catch (IOException ex) {
-     System.err.println(ex);
-    }}
 } 
