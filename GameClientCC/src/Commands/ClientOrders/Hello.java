@@ -6,6 +6,7 @@
 package Commands.ClientOrders;
 
 
+import BusinessEntities.UserBE;
 import Commands.Orders.*;
 import Core.*;
 import UDPClient.UDPClient;
@@ -22,7 +23,10 @@ public class Hello implements ClientOrder {
     
     @Override
     public void execute() {
-        
+        //GET USERID
+        UserBE user = new UserBE();
+        user.setId(message.label);
+        business.setUser(user);
     }
     
 }

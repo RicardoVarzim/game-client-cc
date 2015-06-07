@@ -28,6 +28,7 @@ public class Menu {
     public Menu(){
         out = System.out;
         in = new Scanner(System.in);
+        business = ClientBusinessLayer.getInstance();
     }
     
 

@@ -21,6 +21,8 @@ public class ClientBusinessLayer {
     //make the constructor private so that this class cannot be instantiated
     private ClientBusinessLayer(){
         this._gameBO = new GameBO();
+        this._userBE = new UserBE();
+        this._nextGame = null;
     }
 
     //Get the only object available

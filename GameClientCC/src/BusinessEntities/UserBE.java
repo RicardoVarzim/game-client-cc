@@ -9,6 +9,15 @@ public class UserBE extends Entity {
     private boolean inGame;
     private boolean loggedIn;
     
+    public UserBE(){
+        this.name = "";
+        this.password = "";
+        this.totalScore = 0;
+        this.hasGame = false;
+        this.inGame = false;
+        this.loggedIn = false;
+    }
+    
     public UserBE(String name,String password){
         this.name = name;
         this.password = password;
@@ -16,6 +25,10 @@ public class UserBE extends Entity {
         this.hasGame = false;
         this.inGame = false;
         this.loggedIn = false;  
+    }
+    
+    public void setId(int id){
+        super.id = id;
     }
     
     //GETS
