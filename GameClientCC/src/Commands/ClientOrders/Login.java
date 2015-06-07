@@ -24,7 +24,7 @@ public class Login implements ClientOrder {
     
     @Override
     public void execute() {
-        System.out.println(message.fields.get(0));
+        //System.out.println(message.fields.get(0));
     }
     
 }

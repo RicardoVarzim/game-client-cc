@@ -14,6 +14,8 @@ public class ClientBusinessLayer {
     static UDPClient udpClient;
     //GlobalVars
     private GameBO _gameBO;
+    private UserBE _userBE;
+    private GameBE _nextGame;
  
     
     //make the constructor private so that this class cannot be instantiated
@@ -26,6 +28,24 @@ public class ClientBusinessLayer {
         return instance;
     }
     
+    public void setUser(UserBE user){
+        this._userBE = user;
+    }
+    
+    public UserBE getUser(){
+        return _userBE;
+    }
+    
+    public void setGame(GameBE game){
+        this._nextGame = game;
+    }
+    
+    public GameBE getGame(){
+        return _nextGame;
+    }
+    
+    
+    //Lógica de Comandos a Enviar
     public void hello(){
         CommandFactory factory = new CommandFactory();
         udpClient = new UDPClient(factory.Hello());
@@ -71,6 +91,36 @@ public class ClientBusinessLayer {
     public void make_challenge(GameBE game){
         CommandFactory factory = new CommandFactory();
         udpClient = new UDPClient(factory.Make_challenge(game));
+        new Thread(udpClient).start();
+    }
+    
+    public void accept_challenge(String game){
+        CommandFactory factory = new CommandFactory();
+        udpClient = new UDPClient(factory.Accept_challenge(game));
+        new Thread(udpClient).start();
+    }
+    
+    public void delete_challenge(String game){
+        CommandFactory factory = new CommandFactory();
+        udpClient = new UDPClient(factory.Accept_challenge(game));
+        new Thread(udpClient).start();
+    }
+    
+    public void answer(GameBE game, int answer){
+        CommandFactory factory = new CommandFactory();
+        udpClient = new UDPClient(factory.Answer(game.id,game.getName(),answer));
+        new Thread(udpClient).start();
+    }
+    
+    public void retransmit(GameBE game, int answer, int packId){
+        CommandFactory factory = new CommandFactory();
+        udpClient = new UDPClient(factory.Retransmit(game.getName(),answer,packId));
+        new Thread(udpClient).start();
+    }
+    
+    public void list_ranking(){
+        CommandFactory factory = new CommandFactory();
+        udpClient = new UDPClient(factory.List_ranking());
         new Thread(udpClient).start();
     }
 }

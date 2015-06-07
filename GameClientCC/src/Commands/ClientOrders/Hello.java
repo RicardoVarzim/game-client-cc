@@ -8,6 +8,7 @@ package Commands.ClientOrders;
 
 import Commands.Orders.*;
 import Core.*;
+import UDPClient.UDPClient;
 
 public class Hello implements ClientOrder {
 
@@ -21,7 +22,7 @@ public class Hello implements ClientOrder {
     
     @Override
     public void execute() {
-        business.hello();
+        
     }
     
 }

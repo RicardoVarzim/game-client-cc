@@ -5,11 +5,13 @@
  */
 package UI;
 
-import BusinessEntities.ChallengeBE;
-import Commands.ClientOrders.Login;
+import BusinessEntities.GameBE;
+import BusinessEntities.UserBE;
+import Core.ClientBusinessLayer;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 /**
@@ -21,18 +23,7 @@ public class Menu {
 
     private PrintStream out;
     private Scanner in;
-    //private Comunicador com;
-    private short label;
-    //private Interpretador inter;
-    private ChallengeBE desafio;
-
-//    public Menu(Comunicador comu, Interpretador interp) {
-//        out = System.out;
-//        in = new Scanner(System.in);
-//        this.com = comu;
-//        this.inter = interp;
-//        this.label = 1;
-//    }
+    private ClientBusinessLayer business;
 
     public Menu(){
         out = System.out;
@@ -46,9 +37,7 @@ public class Menu {
         out.println();
         while (true) {
             in.nextLine();
-            clearScreen();
-            out.println("*** CC-Music ***");
-            out.println();
+            clrScreen();
             out.println("*** Menu Principal ***");
             out.println();
             out.println("1-Login");
@@ -87,9 +76,7 @@ public class Menu {
         out.println();
         while (true) {
             in.nextLine();
-            clearScreen();
-            out.println("*** CC-Music ***");
-            out.println();
+            clrScreen();
             out.println("*** Menu Principal ***");
             out.println();
             out.println("1-Criar novo desafio");
@@ -124,7 +111,7 @@ public class Menu {
         }
     }
 
-    public void clearScreen() {
+    public void clrScreen() {
         int i = 0;
         while (i < 25) {
             out.println();
@@ -133,103 +120,43 @@ public class Menu {
     }
 
     private void login() {
-        String user;
+        String name;
         String pass;
 
-        clearScreen();
+        clrScreen();
         out.println("*** Login ***");
         out.println();
         out.print("\nNickname: ");
-        user = in.nextLine();
-        if (user.length() > 75) {
-            out.print("Nickname muito grande, não pode exceder 75 carateres!");
-            return;
-        }
-
-        if (user.length() < 1) {
-            out.print("Nickname inválido!");
-            return;
-        }
-
+        name = in.nextLine();
+        
         out.print("Password: ");
         pass = in.nextLine();
-        if (pass.length() > 75) {
-            out.print("Password muito grande, não pode exceder 75 carateres!");
-            return;
-        }
 
-        if (pass.length() < 1) {
-            out.print("Password inválida!");
-            return;
-        }
-
-        
-        //TODO: VALIDAR LOGIN (Jà esta feito)
+        UserBE user = new UserBE(name,pass);
+        business.login(user);
     }
 
     private void register() {
-        String nome;
-        String alcunha;
+        String name;
         String pass;
 
-        clearScreen();
+        clrScreen();
         out.println("*** Registar ***");
         out.println();
         out.println("Introduza os seus dados:");
 
-        out.print("Nickname: ");
-        alcunha = in.nextLine();
-        if (alcunha.length() > 255) {
-            out.println("Nickname muito grande, não pode exceder 255 carateres");
-            return;
-        }
-
-        if (alcunha.length() < 1) {
-            out.print("Alcunha Inválida!");
-            return;
-        }
-
+        out.print("Nome: ");
+        name = in.nextLine();
+        
         out.print("Password: ");
         pass = in.nextLine();
-        if (pass.length() > 255) {
-            out.println("Password muito grande, não pode exceder 255 carateres!");
-            return;
-        }
-
-        if (pass.length() < 1) {
-            out.print("Password Inválida!");
-            return;
-        }
-
-        out.print("Nome: ");
-        nome = in.nextLine();
-        if (nome.length() > 255) {
-            out.println("Nome muito grande, não pode exceder 255 carateres!");
-            return;
-        }
-
-        if (nome.length() < 1) {
-            out.print("Nome Inválido!");
-            return;
-        }
-
-        //TODO:REGISTAR
+        
+        UserBE user = new UserBE(name,pass);
+        business.register(user);
     }
 
     private void logout() {
-//        Logout l = new Logout(label);
-//        byte[] data = l.generate();
-//        data = com.send(data);
-//        label++;
-//        try {
-//            inter.checkOK(data);
-//        } catch (UnknownTypeException ex) {
-//            out.println("Fatal Eror: UnknownTypeException");
-//        } catch (VersionMissmatchException ex) {
-//            out.println("Fatal Eror: VersionMissmatchException");
-//        } catch (NotOkException ex) {
-//            out.println("Fatal Eror: NotOkException");
-//        }
+        business.logout();
     }
 
     private void makeChallenge() {
@@ -238,21 +165,12 @@ public class Menu {
         String hora;
         int ano, mes, dia, hour, min, seg;
 
-        clearScreen();
+        clrScreen();
         out.println("*** Criar novo desafio ***");
         out.println();
         out.print("Introduza o nome do desafio: ");
         nome = in.nextLine();
-        if (nome.length() > 255) {
-            out.println("Nome muito grande, não pode exceder 255 carateres!");
-            return;
-        }
-
-        if (nome.length() < 1) {
-            out.print("Nome Inválido!");
-            return;
-        }
-
+        
         out.print("Introduza a data (AAMMDD): ");
         data = in.nextLine();
         if (data.length() != 6) {
@@ -292,6 +210,11 @@ public class Menu {
             return;
         }
 
+        GregorianCalendar gcalendar = new GregorianCalendar(ano+2000, mes, dia, hour, min, seg);
+        
+        GameBE game = new GameBE(nome, null,gcalendar);
+        business.make_challenge(game);
+        
 //        MakeChallenge mkC = new MakeChallenge(nome, data, hora, label);
 //        byte[] dados = mkC.generate();
 //        dados = com.send(dados);
@@ -322,10 +245,12 @@ public class Menu {
     }
 
     private void listChallenge() {
-        clearScreen();
+        clrScreen();
         out.println("*** Lista de Desafios ***");
         out.println();
 
+        business.list_challenges();
+        
 //        ListChallenge lc = new ListChallenge(label);
 //        label++;
 //        byte[] dados = lc.generate();
@@ -344,7 +269,7 @@ public class Menu {
     private void acceptChallenge() {
         String nome, data, hora;
 
-        clearScreen();
+        clrScreen();
         out.println("*** Entrar num Desafio ***");
         out.println();
         out.print("Introduza o nome do desafio: ");
@@ -359,6 +284,7 @@ public class Menu {
             return;
         }
 
+        business.accept_challenge(nome);
 //        AcceptChallenge ac = new AcceptChallenge(nome, label);
 //        label++;
 //        byte[] dados = ac.generate();
@@ -387,14 +313,16 @@ public class Menu {
     private synchronized void waitForMatch() {
         out.println("À espera que o desafio começe...");
 
+        GameBE game = business.getGame();
+        
         int tempo = 0;
 
-        tempo += (356 * 24 * 60 * 60) * (desafio.getAno() - Calendar.getInstance().get(Calendar.YEAR));
-        tempo += (30 * 24 * 60 * 60) * (desafio.getMes() - (Calendar.getInstance().get(Calendar.MONTH) + 1));
-        tempo += (24 * 60 * 60) * (desafio.getDia() - Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-        tempo += (60 * 60) * (desafio.getHor() - Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
-        tempo += (60) * (desafio.getMin() - Calendar.getInstance().get(Calendar.MINUTE));
-        tempo += desafio.getSeg() - Calendar.getInstance().get(Calendar.SECOND);
+        tempo += (356 * 24 * 60 * 60) * (game.getData().get(Calendar.YEAR) - Calendar.getInstance().get(Calendar.YEAR));
+        tempo += (30 * 24 * 60 * 60) * (game.getData().get(Calendar.MONTH) + 1 - (Calendar.getInstance().get(Calendar.MONTH) + 1));
+        tempo += (24 * 60 * 60) * (game.getData().get(Calendar.DAY_OF_MONTH) - Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        tempo += (60 * 60) * (game.getData().get(Calendar.HOUR_OF_DAY) - Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
+        tempo += (60) * (game.getData().get(Calendar.MINUTE) - Calendar.getInstance().get(Calendar.MINUTE));
+        tempo += game.getData().get(Calendar.SECOND) - Calendar.getInstance().get(Calendar.SECOND);
         out.println("Tempo de Espera: " + tempo + " segundos...");
 
         if (tempo < 0) {

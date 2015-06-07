@@ -7,6 +7,7 @@ package Commands.ClientOrders;
 
 import Commands.Orders.*;
 import Core.*;
+import UDPClient.UDPClient;
 
 /**
  *
@@ -24,10 +25,7 @@ public class Register implements ClientOrder {
     
     @Override
     public void execute() {
-        //verificar se o PDU DE REGISTO é valido ou nao
         
-            //registado com sucesso
-            System.out.println(message.fields.get(0));
     }
     
 }

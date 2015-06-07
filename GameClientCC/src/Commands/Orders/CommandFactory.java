@@ -7,6 +7,7 @@ package Commands.Orders;
 
 import BusinessEntities.GameBE;
 import BusinessEntities.UserBE;
+import Core.ClientBusinessLayer;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -18,52 +19,65 @@ import java.util.List;
  */
 public class CommandFactory {
     
+    private int userID;
+    
     public CommandFactory(){
-        
+        userID = ClientBusinessLayer.getInstance().getUser().id;
     }
+    /**PRIVATE METHODS**/
+    
+    private byte[] parserToByte(ArrayList list) {
+        String data = "";
+        for (Object item : list) {
+            data = data +";"+ (String) item;
+        }
+        return data.getBytes();
+    }
+    
+    /**COMMAND GENERATOR**/
     
     public PDU Hello(){
         
-        PDU command = new PDU((byte)0,(byte)0,(short)1,(byte)1,(byte)1,(short)1,new ArrayList<>());
+        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)1,(byte)1,(short)1, null);
         return command;
     }
     
     public PDU Register(UserBE user){
-        ArrayList list = new ArrayList<String>();
+        ArrayList list = new ArrayList<>();
         list.add(user.getName());
         list.add(user.getPassword());
-        PDU command = new PDU((byte)0,(byte)0,(short)1,(byte)2,(byte)1,(short)1, list);
+        byte[] listResult = parserToByte(list);
+        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)2,(byte)1,(short)listResult.length, listResult);
         return command;
     }
     
     
      public PDU Login(UserBE user){
-        ArrayList list = new ArrayList<String>();
+        ArrayList list = new ArrayList<>();
         list.add(user.getName());
         list.add(user.getPassword());
-        //TODO:
-        int size = 10;
-        PDU command = new PDU((byte)0,(byte)0,(short)1,(byte)3,(byte)2,(short)size, list);
+        byte[] listResult = parserToByte(list);
+        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)3,(byte)2,(short)listResult.length, listResult);
         return command;
     }
 
     public PDU Logout() {
-        PDU command = new PDU((byte)0,(byte)0,(short)1,(byte)4,(byte)0,(short)0, null);
+        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)4,(byte)0,(short)0, null);
         return command;
     }
 
     public PDU Quit() {
-        PDU command = new PDU((byte)0,(byte)0,(short)1,(byte)5,(byte)0,(short)0, null);
+        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)5,(byte)0,(short)0, null);
         return command;
     }
 
     public PDU End() {
-        PDU command = new PDU((byte)0,(byte)0,(short)1,(byte)6,(byte)0,(short)0, null);
+        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)6,(byte)0,(short)0, null);
         return command;
     }
 
     public PDU List_challenges() {
-        PDU command = new PDU((byte)0,(byte)0,(short)1,(byte)7,(byte)0,(short)0, null);
+        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)7,(byte)0,(short)0, null);
         return command;
     }
 
@@ -82,27 +96,27 @@ public class CommandFactory {
         int segundo = gcalendar.get(Calendar.SECOND);
         String hour = String.valueOf(hora+minuto+segundo);
         list.add(hour);
-        //TODO: sizeof(list)
-        int size = 10;
-        PDU command = new PDU((byte)0,(byte)0,(short)1,(byte)8,(byte)3,(short)size, list);
+        
+        byte[] listResult = parserToByte(list);
+        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)8,(byte)3,(short)listResult.length, listResult);
         return command;
     }
     
     public PDU Accept_challenge(String game) {
         ArrayList list = new ArrayList<String>();
         list.add(game);
-         //TODO: sizeof(list)
-        int size = 10;
-        PDU command = new PDU((byte)0,(byte)0,(short)1,(byte)9,(byte)1,(short)size, list);
+        byte[] listResult = parserToByte(list);
+        
+        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)9,(byte)1,(short)listResult.length, listResult);
         return command;
     }
     
     public PDU Delete_challenge(String game) {
         ArrayList list = new ArrayList<String>();
         list.add(game);
-         //TODO: sizeof(list)
-        int size = 10;
-        PDU command = new PDU((byte)0,(byte)0,(short)1,(byte)10,(byte)1,(short)size, list);
+        byte[] listResult = parserToByte(list);
+        
+        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)10,(byte)1,(short)listResult.length, listResult);
         return command;
     }
     
@@ -111,9 +125,9 @@ public class CommandFactory {
         list.add(String.valueOf(gameId));
         list.add(game);
         list.add(String.valueOf(questionId));
-         //TODO: sizeof(list)
-        int size = 10;
-        PDU command = new PDU((byte)0,(byte)0,(short)1,(byte)11,(byte)3,(short)size, list);
+        byte[] listResult = parserToByte(list);
+        
+        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)11,(byte)3,(short)listResult.length, listResult);
         return command;
     }
     
@@ -123,14 +137,15 @@ public class CommandFactory {
         list.add(String.valueOf(questionId));
         list.add(String.valueOf(packageId));
         
-         //TODO: sizeof(list)
-        int size = 10;
-        PDU command = new PDU((byte)0,(byte)0,(short)1,(byte)12,(byte)3,(short)size, list);
+        byte[] listResult = parserToByte(list);
+        
+        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)12,(byte)3,(short)listResult.length, listResult);
         return command;
     }
     
     public PDU List_ranking() {
-        PDU command = new PDU((byte)0,(byte)0,(short)1,(byte)13,(byte)0,(short)0, null);
+        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)13,(byte)0,(short)0, null);
         return command;
     }
+
 }
