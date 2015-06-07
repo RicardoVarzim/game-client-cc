@@ -1,5 +1,6 @@
 package BusinessEntities;
  
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -7,8 +8,7 @@ import java.util.List;
 public class GameBE  extends Entity {
  
     private String name;
-    private List<Integer> users;
-    private List<Integer> questions;
+    private ArrayList<QuestionBE> questions;
     private GregorianCalendar startDate;
     
     //TODO: create gets e sets e constructors
@@ -16,14 +16,13 @@ public class GameBE  extends Entity {
     
     public GameBE(String name){
         this.name = name;
-        this.questions = new ArrayList<Integer>();
-        this.users = new ArrayList<Integer>();
+        this.questions = new ArrayList<QuestionBE>();
+        this.startDate = GregorianCalendar.from(ZonedDateTime.now());
     }
     
-    public GameBE(String name, int n,List<Integer> lu, List<Integer> q, GregorianCalendar date){
+    public GameBE(String name, ArrayList<QuestionBE> q, GregorianCalendar date){
         this.name = name;
-        this.users = new ArrayList<Integer> (lu);
-        this.questions = new ArrayList<Integer> (q);
+        this.questions = q;
         this.startDate = date;
     }
     
@@ -37,26 +36,28 @@ public class GameBE  extends Entity {
          this.name = n;
     }
     
+    public GregorianCalendar getData() {
+        return startDate;
+    }
+    
     public void setStartDate(GregorianCalendar date){
         this.startDate = date;
     }
     
     //Add
-    public boolean addUser(int userId){
+    public boolean addQuestion(QuestionBE q){
         boolean result = false;
-        if(!users.contains(userId)){
-            users.add(userId);
+        if(!questions.contains(q)){
+            questions.add(q);
             result = true;
         }
         return result;
     }
     
-    public boolean addQuestion(int questionId){
-        boolean result = false;
-        if(!questions.contains(questionId)){
-            questions.add(questionId);
-            result = true;
-        }
-        return result;
+    public ArrayList<QuestionBE> getPerguntas() {
+        return questions;
     }
-}
+    public QuestionBE getPergunta(int numero) {
+        return this.questions.get(numero - 1);
+    }
+}   

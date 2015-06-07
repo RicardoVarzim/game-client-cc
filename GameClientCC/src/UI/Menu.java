@@ -5,7 +5,7 @@
  */
 package UI;
 
-import BusinessEntities.DesafioBE;
+import BusinessEntities.ChallengeBE;
 import Commands.ClientOrders.Login;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class Menu {
     //private Comunicador com;
     private short label;
     //private Interpretador inter;
-    private DesafioBE desafio;
+    private ChallengeBE desafio;
 
 //    public Menu(Comunicador comu, Interpretador interp) {
 //        out = System.out;

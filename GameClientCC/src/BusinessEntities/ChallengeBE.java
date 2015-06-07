@@ -11,13 +11,13 @@ import java.util.ArrayList;
  *
  * @author Ricardo
  */
-public class DesafioBE extends Entity {
+public class ChallengeBE extends Entity {
     private String nome;
     private String data, hora;
     private int ano, mes, dia, hor, min, seg;
     private ArrayList<QuestionBE> perguntas;
 
-    public DesafioBE() {
+    public ChallengeBE() {
         this.perguntas = new ArrayList<>();
         this.nome = "";
         this.data = "";
@@ -30,7 +30,7 @@ public class DesafioBE extends Entity {
         this.seg = 0;
     }
 
-    public DesafioBE(ArrayList<QuestionBE> perguntas) {
+    public ChallengeBE(ArrayList<QuestionBE> perguntas) {
         this.perguntas = perguntas;
         this.nome = "";
         this.data = "";
@@ -43,7 +43,7 @@ public class DesafioBE extends Entity {
         this.seg = 0;
     }
 
-    public DesafioBE(int nMaxPerguntas) {
+    public ChallengeBE(int nMaxPerguntas) {
         if (nMaxPerguntas < 1) {
             perguntas = new ArrayList<>();
         } else {
@@ -60,7 +60,7 @@ public class DesafioBE extends Entity {
         this.seg = 0;
     }
 
-    public DesafioBE(String nome, String data, String hora) throws Exception {
+    public ChallengeBE(String nome, String data, String hora) throws Exception {
         this.perguntas = new ArrayList<>();
         this.nome = nome;
         this.data = data;
