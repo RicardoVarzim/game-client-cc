@@ -1,22 +1,28 @@
 package UDPClient;
 
-import Commands.PDU;
+import Commands.Orders.ClientCommandBroker;
+import Commands.Orders.PDU;
+
 import java.io.*; 
 import java.net.*; 
 import java.util.logging.Level;
 import java.util.logging.Logger;
   
 public class UDPClient implements Runnable {
-
+    
+    static ClientCommandBroker broker ;
     protected String host;
     private PDU message;
     protected int port;
+    protected int serverPort;
     
     public UDPClient(PDU message){
-        host = new String("127.0.0.1");
-        port = 9874;
-        message = message;
+        this.host = "127.0.0.1";
+        this.port = 9874;
+        this.serverPort = 9875;
+        this.message = message;
     }
+    
     public UDPClient(String host, int port, PDU message){
         this.host = host;
         this.port = port;
@@ -30,9 +36,11 @@ public class UDPClient implements Runnable {
             // 
             DatagramSocket clientSocket = new DatagramSocket(port); 
             InetAddress IPAddress = InetAddress.getByName(host);           
+            
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             ObjectOutputStream os = new ObjectOutputStream(outputStream);
             os.writeObject(message);
+            
             byte[] sendData = outputStream.toByteArray();
             DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9875);
 
@@ -51,6 +59,11 @@ public class UDPClient implements Runnable {
             try {
                 
                 PDU message = (PDU) is.readObject();
+                broker = ClientCommandBroker.getInstance();
+        
+                broker.takeOrder(message);
+                broker.placeOrders();
+                
                 System.out.println("PDU object received = "+message);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(UDPClient.class.getName()).log(Level.SEVERE, null, ex);

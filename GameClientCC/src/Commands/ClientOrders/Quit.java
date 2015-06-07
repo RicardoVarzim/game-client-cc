@@ -3,28 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Commands.Orders;
+package Commands.ClientOrders;
 
-import Commands.*;
+import Commands.Orders.*;
 import Core.*;
+import Core.ClientBusinessLayer;
 
 /**
  *
  * @author Ricardo
  */
-public class Register implements Order {
+public class Quit implements ClientOrder {
 
-    private BusinessLayer business;
+    private ClientBusinessLayer business;
     private PDU message;
     
-    public Register(PDU message){
-        this.business = BusinessLayer.getInstance();
+    public Quit(PDU message) {
+        this.business = ClientBusinessLayer.getInstance();
         this.message = message;
     }
-    
+
     @Override
     public void execute() {
-        business.register();
+        business.quit();
     }
     
 }

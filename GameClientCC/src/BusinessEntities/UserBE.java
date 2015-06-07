@@ -57,4 +57,13 @@ public class UserBE extends Entity {
     public void setLoggedIn(boolean b){
         this.loggedIn = b;
     }
+
+    public void update(UserBE o) {
+        this.name = o.name;
+        this.password = o.password;
+        this.totalScore = o.totalScore;
+        this.hasGame = o.hasGame;
+        this.inGame = o.inGame;
+        this.loggedIn = o.loggedIn;
+    }
 }
