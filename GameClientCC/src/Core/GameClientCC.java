@@ -1,8 +1,4 @@
 package Core;
-
-
-import Commands.Orders.CommandFactory;
-import UDPClient.*;
 import UI.Menu;
 
 public class GameClientCC {
@@ -12,6 +8,7 @@ public class GameClientCC {
         
         Menu menu = new Menu();
         menu.start();
+        
     }
     
 }

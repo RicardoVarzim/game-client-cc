@@ -7,7 +7,6 @@ package Commands.ClientOrders;
 
 
 import Commands.Orders.*;
-import Commands.Orders.*;
 import Core.*;
 
 public class Hello implements ClientOrder {
