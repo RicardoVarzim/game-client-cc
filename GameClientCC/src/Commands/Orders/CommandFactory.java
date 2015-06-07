@@ -28,7 +28,7 @@ public class CommandFactory {
     
     public PDU Hello(){
         
-        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)1,(byte)1,(short)1, null);
+        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)1,(byte)1,(short)1);
         return command;
     }
     
@@ -52,22 +52,22 @@ public class CommandFactory {
     }
 
     public PDU Logout() {
-        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)4,(byte)0,(short)0, null);
+        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)4,(byte)0,(short)0);
         return command;
     }
 
     public PDU Quit() {
-        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)5,(byte)0,(short)0, null);
+        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)5,(byte)0,(short)0);
         return command;
     }
 
     public PDU End() {
-        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)6,(byte)0,(short)0, null);
+        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)6,(byte)0,(short)0);
         return command;
     }
 
     public PDU List_challenges() {
-        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)7,(byte)0,(short)0, null);
+        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)7,(byte)0,(short)0);
         return command;
     }
 
@@ -134,7 +134,7 @@ public class CommandFactory {
     }
     
     public PDU List_ranking() {
-        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)13,(byte)0,(short)0, null);
+        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)13,(byte)0,(short)0);
         return command;
     }
 
