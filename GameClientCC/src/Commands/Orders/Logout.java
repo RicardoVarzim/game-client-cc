@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Commands.ClientOrders;
+package Commands.Orders;
 
+import Commands.PDU;
+import Commands.ClientOrder;
 import Commands.Orders.*;
 import Core.*;
 import Core.ClientBusinessLayer;
@@ -13,19 +15,19 @@ import Core.ClientBusinessLayer;
  *
  * @author Ricardo
  */
-public class ListChallenges implements ClientOrder {
+public class Logout implements ClientOrder {
 
     private ClientBusinessLayer business;
     private PDU message;
     
-    public ListChallenges(PDU message) {
+    public Logout(PDU message) {
         this.business = ClientBusinessLayer.getInstance();
         this.message = message;
     }
 
     @Override
     public void execute() {
-        business.list_challenges();
+        business.logout();
     }
     
 }

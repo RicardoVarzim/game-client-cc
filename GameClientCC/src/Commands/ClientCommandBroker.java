@@ -1,6 +1,13 @@
-package Commands.Orders;
+package Commands;
 
-import Commands.ClientOrders.*;
+import Commands.Orders.End;
+import Commands.Orders.Hello;
+import Commands.Orders.ListChallenges;
+import Commands.Orders.Login;
+import Commands.Orders.Logout;
+import Commands.Orders.MakeChallenge;
+import Commands.Orders.Quit;
+import Commands.Orders.Register;
 import java.util.ArrayList;
 import java.util.List;
 

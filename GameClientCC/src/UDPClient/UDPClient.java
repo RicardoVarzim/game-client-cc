@@ -1,7 +1,7 @@
 package UDPClient;
 
-import Commands.Orders.ClientCommandBroker;
-import Commands.Orders.PDU;
+import Commands.ClientCommandBroker;
+import Commands.PDU;
 
 import java.io.*; 
 import java.net.*; 

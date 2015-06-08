@@ -3,7 +3,7 @@ package Core;
 import BusinessEntities.GameBE;
 import BusinessEntities.UserBE;
 import BusinessObjects.*;
-import Commands.Orders.CommandFactory;
+import Commands.*;
 import UDPClient.UDPClient;
 
 public class ClientBusinessLayer {

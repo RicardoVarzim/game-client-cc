@@ -1,9 +1,8 @@
-package Commands.ClientOrders;
+package Commands.Orders;
 
-import Commands.Orders.*;
-import Core.*;
+import Commands.PDU;
+import Commands.ClientOrder;
 import Core.ClientBusinessLayer;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,8 +26,6 @@ public class MakeChallenge implements ClientOrder {
                 //TODO: carregar Game
             }
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MakeChallenge.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
             Logger.getLogger(MakeChallenge.class.getName()).log(Level.SEVERE, null, ex);
         }
         

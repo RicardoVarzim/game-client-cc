@@ -1,4 +1,4 @@
-package Commands.Orders;
+package Commands;
 
 public interface ClientOrder {   
     void execute();

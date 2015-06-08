@@ -10,7 +10,6 @@ import BusinessEntities.UserBE;
 import Core.ClientBusinessLayer;
 import java.io.PrintStream;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
@@ -35,6 +34,7 @@ public class Menu {
     public void start() {
         int opcao;
 
+        business.hello();
         out.println();
         while (true) {
             in.nextLine();
