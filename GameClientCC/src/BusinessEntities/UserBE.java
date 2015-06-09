@@ -16,6 +16,7 @@ public class UserBE extends Entity {
         this.hasGame = false;
         this.inGame = false;
         this.loggedIn = false;
+        super.id = 0;
     }
     
     public UserBE(String name,String password){
@@ -24,7 +25,8 @@ public class UserBE extends Entity {
         this.totalScore = 0;
         this.hasGame = false;
         this.inGame = false;
-        this.loggedIn = false;  
+        this.loggedIn = false;
+        super.id = 0;
     }
     
     public void setId(int id){

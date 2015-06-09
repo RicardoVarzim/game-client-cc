@@ -67,6 +67,7 @@ public class Menu {
                     break;
                 case (2):
                     register();
+                    break;
             }
         }
     }

@@ -11,9 +11,11 @@ public class CommandFactory {
     
     private int userID = 0;
     private DateParser dateParser = new DateParser();
+    private ClientBusinessLayer business;
     
     public CommandFactory(){
-        
+        business = ClientBusinessLayer.getInstance();
+        userID = business.getUser().getId();
     }
     
     public void setUserId(int id){
@@ -24,7 +26,7 @@ public class CommandFactory {
     
     public PDU Hello(){
         
-        PDU command = new PDU((byte)0,(byte)0,(short)0,(byte)1,(byte)1,(short)1);
+        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)1,(byte)1,(short)1);
         return command;
     }
     
