@@ -43,7 +43,7 @@ public class Menu {
         out.println("2-Registar");
         out.println("0-Sair\n");
 
-        out.print("Opção: ");
+        out.print(": ");
         try {
             opcao = Integer.parseInt(in.nextLine());
 
@@ -72,12 +72,12 @@ public class Menu {
             clrScreen();
             out.println("------------------- Menu Principal -------------------");
             out.println();
-            out.println("1-Criar novo desafio");
-            out.println("2-Listar os desafios atuais");
+            out.println("1-Novo desafio");
+            out.println("2-Listar Desafios");
             out.println("3-Entrar num desafio");
             out.println("0-Sair\n");
 
-            out.print("Opção: ");
+            out.print(": ");
             try {
                 opcao = Integer.parseInt(in.nextLine());
                 switch (opcao) {
@@ -120,7 +120,7 @@ public class Menu {
         clrScreen();
         out.println("------------------- Login -------------------");
         out.println();
-        out.print("\nNickname: ");
+        out.print("\nNome: ");
         name = in.nextLine();
         
         out.print("Password: ");
@@ -160,12 +160,12 @@ public class Menu {
         int ano, mes, dia, hour, min, seg;
 
         clrScreen();
-        out.println("------------------- Criar novo desafio -------------------");
+        out.println("------------------- Criar desafio -------------------");
         out.println();
-        out.print("Introduza o nome do desafio: ");
+        out.print("Nome: ");
         nome = in.nextLine();
         
-        out.print("Introduza a data (AAMMDD): ");
+        out.print("Data (AAMMDD): ");
         data = in.nextLine();
         if (data.length() != 6) {
             out.println("Formato inválido!");
@@ -185,7 +185,7 @@ public class Menu {
             return;
         }
 
-        out.print("Introduza a hora (HHMMSS): ");
+        out.print("Hora (HHMMSS): ");
         hora = in.nextLine();
         if (hora.length() != 6) {
             out.println("Formato inválido!");
@@ -229,15 +229,7 @@ public class Menu {
         out.print("Introduza o nome do desafio: ");
 
         nome = in.nextLine();
-        if (nome.length() > 255) {
-            out.println("Nome muito grande, não pode exceder 255 carateres!");
-            return;
-        }
-        if (nome.length() < 1) {
-            out.print("Nome Inválido!");
-            return;
-        }
-
+        
         business.accept_challenge(nome);
     }
 
@@ -256,10 +248,6 @@ public class Menu {
         tempo += game.getData().get(Calendar.SECOND) - Calendar.getInstance().get(Calendar.SECOND);
         out.println("Tempo de Espera: " + tempo + " segundos...");
 
-        if (tempo < 0) {
-            out.println("FATAL ERROR: Tempo negativo!");
-            System.exit(0);
-        }
         try {
             while (tempo > 0) {
                 wait(1000);
@@ -270,57 +258,13 @@ public class Menu {
         } catch (InterruptedException ex) {
         }
 
-        out.println("Espera Terminou! O jogo vai começar!");
+        out.println("O jogo vai começar!");
 
-        inDesafio();
+        inGame();
     }
 
-    private void inDesafio() {
-//        Transmit t;
-//        NextPackage np;
-//        Group g = new Group();
-//        byte[] piece;
-//        int i = 2, pergunta = 1;
-//        Pergunta p = null;
-//
-//        while (true) {
-//            t = new Transmit(label, pergunta, desafio.getNome());
-//            piece = com.send(t.generate());
-//            //System.out.println("Tamanho: " + piece.length);
-//            g.addPiece(piece);
-//            //out.println("Recebido o pacote: 1");
-//            while (!g.isComplete()) {
-//                np = new NextPackage(i);
-//                i++;
-//                piece = com.send(np.generatePDU());
-//                g.addPiece(piece);
-//                //out.println("Recebido o pacote: " + (i - 1));
-//            }
-//            //np = new NextPackage(i);
-//            //com.send(np.generatePDU());
-//            out.println("Todos os pacotes foram recebidos.");
-//
-//            try {
-//                p = inter.checkTransmit(g.generate().generatePDU(), desafio, pergunta);
-//                if (p == null) {
-//                    System.out.println("FATAL ERROR: Pergunta == null");
-//                    System.exit(0);
-//                }
-//            } catch (MissingPieciesException ex) {
-//                out.println("FATAL ERROR: Faltam alguns pacotes!");
-//                System.exit(0);
-//            }
-//
-//            out.println("Pergunta " + pergunta + "!");
-//            out.println(p.getPergunta());
-//            out.println("1 - " + p.getResposta(1));
-//            out.println("2 - " + p.getResposta(2));
-//            out.println("3 - " + p.getResposta(3));
-//            in.nextLine();
-//
-//            pergunta++;
-//        }
-//
+    private void inGame() {
+
     }
 
 }

@@ -18,12 +18,14 @@ public class GameBE  extends Entity {
         this.name = name;
         this.questions = new ArrayList<QuestionBE>();
         this.startDate = GregorianCalendar.from(ZonedDateTime.now());
+        currentQuestion = 0;
     }
     
     public GameBE(String name, ArrayList<QuestionBE> q, GregorianCalendar date){
         this.name = name;
         this.questions = q;
         this.startDate = date;
+        currentQuestion = 0;
     }
     
     //GETS
