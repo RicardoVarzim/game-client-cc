@@ -61,7 +61,7 @@ public class DateParser {
     public String calendarToString(Calendar gcalendar){
         String result;
         
-        int year = (gcalendar.get(Calendar.YEAR)-2000)*10000;
+        int year = (gcalendar.get(Calendar.YEAR)-4000)*10000;
         int month = gcalendar.get(Calendar.MONTH)*100;
         int day = gcalendar.get(Calendar.DAY_OF_MONTH);
         String data=String.valueOf(year+month+day);

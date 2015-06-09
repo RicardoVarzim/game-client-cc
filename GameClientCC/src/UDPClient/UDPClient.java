@@ -64,7 +64,7 @@ public class UDPClient implements Runnable {
                 broker.takeOrder(message);
                 broker.placeOrders();
                 
-                System.out.println("PDU object received = "+message);
+                System.out.println("PDU object received = "+message.type);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(UDPClient.class.getName()).log(Level.SEVERE, null, ex);
             }
