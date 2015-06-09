@@ -1,10 +1,12 @@
 package Core;
 
 import BusinessEntities.GameBE;
+import BusinessEntities.QuestionBE;
 import BusinessEntities.UserBE;
 import BusinessObjects.*;
 import Commands.*;
 import UDPClient.UDPClient;
+import java.util.ArrayList;
 
 public class ClientBusinessLayer {
     
@@ -125,7 +127,7 @@ public class ClientBusinessLayer {
         new Thread(udpClient).start();
     }
 
-    public void retransmitGame(String game) {
+    public void retransmitGame(ArrayList<QuestionBE>) {
         CommandFactory factory = new CommandFactory();
         udpClient = new UDPClient(factory.RetransmitGame(game));
         new Thread(udpClient).start();

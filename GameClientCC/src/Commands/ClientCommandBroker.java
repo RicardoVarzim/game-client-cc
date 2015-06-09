@@ -9,6 +9,7 @@ import Commands.Orders.Logout;
 import Commands.Orders.MakeChallenge;
 import Commands.Orders.Quit;
 import Commands.Orders.Register;
+import Commands.Orders.RetransmitGame;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,6 +77,13 @@ public class ClientCommandBroker {
         if(message.type == (byte)9){
             result = new AcceptChallenge(message);
         }
+        if(message.type == (byte)14){
+            result = new RetransmitGame(message);
+        }
         return result;
+    }
+    
+    public synchronized void RetransmitGame(PDU p){
+        _orderList.add(PDUConverter(p));
     }
 }
