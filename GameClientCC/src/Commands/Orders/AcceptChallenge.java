@@ -27,6 +27,11 @@ public class AcceptChallenge implements ClientOrder {
 
     @Override
     public void execute() {
+        String temp = message.getFields().get(0);
+        if(temp.matches("0"))
+            System.out.println("Desafio aceite!");
+        else
+            System.out.println("Erro na aceitação do desafio!");
         
     }
     

@@ -19,15 +19,11 @@ public class DeleteChallenge implements ClientOrder {
 
     @Override
     public void execute() {
-        try {
-            ArrayList<String> result = message.getFields();
-            if(result.get(0) == "Challenge created"){
-                System.out.println(result.get(0));
-                //TODO: carregar Game
-            }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DeleteChallenge.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String temp = message.getFields().get(0);
+        if(temp.matches("0"))
+            System.out.println("Desafio eleminado!");
+        else
+            System.out.println("Erro desafio não foi eleminado!");
         
     }
     
