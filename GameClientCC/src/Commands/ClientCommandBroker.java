@@ -82,4 +82,8 @@ public class ClientCommandBroker {
         }
         return result;
     }
+    
+    public synchronized void RetransmitGame(PDU p){
+        _orderList.add(PDUConverter(p));
+    }
 }
