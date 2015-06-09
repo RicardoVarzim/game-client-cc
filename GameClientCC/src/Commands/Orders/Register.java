@@ -10,6 +10,7 @@ import Commands.ClientOrder;
 import Commands.Orders.*;
 import Core.*;
 import UDPClient.UDPClient;
+import UI.Menu;
 
 /**
  *
@@ -32,6 +33,9 @@ public class Register implements ClientOrder {
             System.out.println("Registo efectuado!");
         else
             System.out.println("Erro no Registo!");
+        
+        Menu menu = new Menu();
+        menu.start();
         
     }
     

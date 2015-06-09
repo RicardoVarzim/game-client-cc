@@ -29,6 +29,8 @@ public class Login implements ClientOrder {
     @Override
     public void execute() {
         String temp = message.getFields().get(0);
+        Menu menu = new Menu();
+            
         if(temp.matches("0")){
             
             UserBE user = business.getUser();
@@ -37,10 +39,13 @@ public class Login implements ClientOrder {
             business.setUser(user);
             
             System.out.println("Login efectuado!");
-            
+            menu.menu2();
         }
-        else
+        else{
             System.out.println("Erro no Login!");
+            menu.start();
+        }
+            
     }
     
 }

@@ -23,7 +23,7 @@ public class DateParser {
         
         ArrayList list = new ArrayList<String>();
         
-        int year = gcalendar.get(Calendar.YEAR)*10000;
+        int year = (gcalendar.get(Calendar.YEAR)-2000)*10000;
         int month = gcalendar.get(Calendar.MONTH)*100;
         int day = gcalendar.get(Calendar.DAY_OF_MONTH);
         String data=String.valueOf(year+month+day);
@@ -53,9 +53,25 @@ public class DateParser {
         min = Integer.parseInt(hora.substring(2, 4));
         seg = Integer.parseInt(hora.substring(4));
         
-        GregorianCalendar gcalendar = new GregorianCalendar(ano+2000, mes, dia, hour, min, seg);
+        GregorianCalendar gcalendar = new GregorianCalendar(ano, mes, dia, hour, min, seg);
         
         return gcalendar;
+    }
+    
+    public String calendarToString(Calendar gcalendar){
+        String result;
+        
+        int year = (gcalendar.get(Calendar.YEAR)-2000)*10000;
+        int month = gcalendar.get(Calendar.MONTH)*100;
+        int day = gcalendar.get(Calendar.DAY_OF_MONTH);
+        String data=String.valueOf(year+month+day);
+        int hora = gcalendar.get(Calendar.HOUR_OF_DAY)*10000;
+        int minuto = gcalendar.get(Calendar.MINUTE)*100;
+        int segundo = gcalendar.get(Calendar.SECOND);
+        String hour = String.valueOf(hora+minuto+segundo);
+        
+        result = data+":"+hour;
+        return result;
     }
     
      public GregorianCalendar stringToCalendar(String temp){
@@ -72,7 +88,7 @@ public class DateParser {
         min = Integer.parseInt(hora.substring(2, 4));
         seg = Integer.parseInt(hora.substring(4));
         
-        GregorianCalendar gcalendar = new GregorianCalendar(ano+2000, mes, dia, hour, min, seg);
+        GregorianCalendar gcalendar = new GregorianCalendar(ano, mes, dia, hour, min, seg);
         
         return gcalendar;
     }

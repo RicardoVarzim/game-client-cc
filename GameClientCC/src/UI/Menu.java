@@ -34,49 +34,40 @@ public class Menu {
     public void start() {
         int opcao;
 
-        business.hello();
+
+        in.nextLine();
+        clrScreen();
+        out.println("*** Menu Principal ***");
         out.println();
-        while (true) {
-            in.nextLine();
-            clrScreen();
-            out.println("*** Menu Principal ***");
-            out.println();
-            out.println("1-Login");
-            out.println("2-Registar");
-            out.println("0-Sair\n");
+        out.println("1-Login");
+        out.println("2-Registar");
+        out.println("0-Sair\n");
 
-            out.print("Opção: ");
-            try {
-                opcao = Integer.parseInt(in.nextLine());
-            } catch (Exception e) {
-                out.println("Intruduza uma opção válida!");
-                continue;
-            }
-
-            if (opcao > 2 || opcao < 0) {
-                out.println("Intruduza uma opção válida!");
-                continue;
-            }
+        out.print("Opção: ");
+        try {
+            opcao = Integer.parseInt(in.nextLine());
 
             switch (opcao) {
-                case (0):
-                    //com.end();
-                    break;
-                case (1):
-                    login();
-                    break;
-                case (2):
-                    register();
-                    break;
+            case (0):
+                break;
+            case (1):
+                login();
+                break;
+            case (2):
+                register();
+                break;
             }
+        } catch (Exception e) {
+            out.println("Intruduza uma opção válida!");
+            start();
         }
+        
     }
 
     public void menu2() {
         int opcao;
 
         out.println();
-        while (true) {
             in.nextLine();
             clrScreen();
             out.println("*** Menu Principal ***");
@@ -89,12 +80,7 @@ public class Menu {
             out.print("Opção: ");
             try {
                 opcao = Integer.parseInt(in.nextLine());
-            } catch (Exception e) {
-                out.println("Intruduza uma opção válida!");
-                continue;
-            }
-
-            switch (opcao) {
+                switch (opcao) {
                 case (0):
                     logout();
                     return;
@@ -108,9 +94,15 @@ public class Menu {
                     acceptChallenge();
                     break;
                 default:
-                    out.println("Intruduza uma opção válida!");
+                    out.println("Intruduza uma opção válida!");menu2();
+                }
+            } catch (Exception e) {
+                out.println("Intruduza uma opção válida!");
+                menu2();
             }
-        }
+
+            
+        
     }
 
     public void clrScreen() {

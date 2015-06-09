@@ -73,22 +73,11 @@ public class CommandFactory {
     public PDU Make_challenge(GameBE game) {
         ArrayList list = new ArrayList<String>();
         list.add(game.getName());
-        //TODO: MAKE PARSER
         
-        Calendar gcalendar = game.getData();
-        int year = gcalendar.get(Calendar.YEAR)*10000;
-        int month = gcalendar.get(Calendar.MONTH)*100;
-        int day = gcalendar.get(Calendar.DAY_OF_MONTH);
-        String data=String.valueOf(year+month+day);
-        list.add(data);
-        int hora = gcalendar.get(Calendar.HOUR_OF_DAY)*10000;
-        int minuto = gcalendar.get(Calendar.MINUTE)*100;
-        int segundo = gcalendar.get(Calendar.SECOND);
-        String hour = String.valueOf(hora+minuto+segundo);
-        list.add(hour);
+        list.add(dateParser.calendarToString(game.getData()));
         
         byte[] listResult = dateParser.parserToByte(list);
-        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)8,(byte)3,(short)listResult.length, listResult);
+        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)8,(byte)2,(short)listResult.length, listResult);
         return command;
     }
     
