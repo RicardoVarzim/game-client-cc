@@ -209,33 +209,6 @@ public class Menu {
         GameBE game = new GameBE(nome, null,gcalendar);
         business.make_challenge(game);
         
-//        MakeChallenge mkC = new MakeChallenge(nome, data, hora, label);
-//        byte[] dados = mkC.generate();
-//        dados = com.send(dados);
-//        label++;
-//
-//        try {
-//            if (inter.checkMkChallenge(dados)) {
-//                out.println("Desafio criado!");
-//                desafio = new Desafio();
-//                desafio.setNome(nome);
-//                try {
-//                    desafio.setData(data);
-//                    desafio.setHora(hora);
-//                    desafio.dateSFtoIF();
-//                } catch (Exception ex) {
-//                    out.println("FATAL ERROR: Data inválida!");
-//                    System.exit(0);
-//                }
-//                waitForMatch();
-//                return;
-//            }
-//            out.println("Desafio não foi criado!");
-//        } catch (UnknownTypeException ex) {
-//            out.println("Fatal Eror: UnknownTypeException");
-//        } catch (VersionMissmatchException ex) {
-//            out.println("Fatal Eror: VersionMissmatchException");
-//        }
     }
 
     private void listChallenge() {
@@ -245,19 +218,6 @@ public class Menu {
 
         business.list_challenges();
         
-//        ListChallenge lc = new ListChallenge(label);
-//        label++;
-//        byte[] dados = lc.generate();
-//        dados = com.send(dados);
-//        ArrayList<Desafio> desafios;
-//
-//        desafios = inter.checkLstChallenge(dados);
-//        if (desafios == null) {
-//            return;
-//        }
-//        for (Desafio d : desafios) {
-//            System.out.println("Nome: \"" + d.getNome() + "\"  Data: \"" + d.getData() + "\" Hora: \"" + d.getHora() + "\"");
-//        }
     }
 
     private void acceptChallenge() {
@@ -279,32 +239,9 @@ public class Menu {
         }
 
         business.accept_challenge(nome);
-//        AcceptChallenge ac = new AcceptChallenge(nome, label);
-//        label++;
-//        byte[] dados = ac.generate();
-//
-//        dados = com.send(dados);
-//
-//        try {
-//            String[] dataEhora = inter.checkAcceptChallenge(dados);
-//            data = dataEhora[0];
-//            hora = dataEhora[1];
-//            desafio = new Desafio(nome, data, hora);
-//            desafio.dateSFtoIF();
-//            out.print("Registado no desafio \"" + nome + "\" com sucesso!");
-//            waitForMatch();
-//        } catch (UnknownTypeException ex) {
-//            out.println("Fatal Eror: UnknownTypeException");
-//        } catch (VersionMissmatchException ex) {
-//            out.println("Fatal Eror: VersionMissmatchException");
-//        } catch (NotOkException ex) {
-//        } catch (Exception ex) {
-//            out.println("FATAL ERROR: " + ex.getMessage());
-//            System.exit(0);
-//        }
     }
 
-    private synchronized void waitForMatch() {
+    public void waitForMatch() {
         out.println("À espera que o desafio começe...");
 
         GameBE game = business.getGame();

@@ -10,6 +10,7 @@ import Commands.ClientOrder;
 import Commands.Orders.*;
 import Core.*;
 import Core.ClientBusinessLayer;
+import UI.Menu;
 
 /**
  *
@@ -31,6 +32,8 @@ public class ListChallenges implements ClientOrder {
             System.out.println(item);
         }
         
+        Menu menu = new Menu();
+        menu.menu2();
     }
     
 }

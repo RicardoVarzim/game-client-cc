@@ -10,6 +10,7 @@ import Commands.ClientOrder;
 import Commands.Orders.*;
 import Core.*;
 import Core.ClientBusinessLayer;
+import UI.Menu;
 
 /**
  *
@@ -28,11 +29,17 @@ public class AcceptChallenge implements ClientOrder {
     @Override
     public void execute() {
         String temp = message.getFields().get(0);
-        if(temp.matches("0"))
+        if(temp.matches("0")){
             System.out.println("Desafio aceite!");
+             //Perguntar se quer ficar em espera?
+            //Pedido para obter jogo
+        }
+            
         else
             System.out.println("Erro na aceitação do desafio!");
         
+        Menu menu = new Menu();
+        menu.waitForMatch();
     }
     
 }

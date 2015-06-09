@@ -1,5 +1,6 @@
 package Commands;
 
+import Commands.Orders.AcceptChallenge;
 import Commands.Orders.End;
 import Commands.Orders.Hello;
 import Commands.Orders.ListChallenges;
@@ -71,6 +72,9 @@ public class ClientCommandBroker {
         }
         if(message.type == (byte)8){
             result = new MakeChallenge(message);
+        }
+        if(message.type == (byte)9){
+            result = new AcceptChallenge(message);
         }
         return result;
     }
