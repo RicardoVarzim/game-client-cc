@@ -5,6 +5,7 @@
  */
 package Commands.Orders;
 
+import BusinessEntities.UserBE;
 import Commands.PDU;
 import Commands.ClientOrder;
 import Commands.Orders.*;
@@ -27,10 +28,18 @@ public class Login implements ClientOrder {
     @Override
     public void execute() {
         String temp = message.getFields().get(0);
-        if(temp.matches("0"))
+        if(temp.matches("0")){
+            
+            UserBE user = business.getUser();
+            user.setId(message.label);
+            user.setLoggedIn(true);
+            business.setUser(user);
+            
             System.out.println("Login efectuado!");
+            
+        }
         else
-            System.out.println("Erro no Registo!");
+            System.out.println("Erro no Login!");
     }
     
 }

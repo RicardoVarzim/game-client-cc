@@ -49,7 +49,7 @@ public class UDPClient implements Runnable {
             byte[] receiveData = new byte[1024];
             DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length); 
             System.out.println ("Waiting for return packet");
-            clientSocket.setSoTimeout(10000);
+            clientSocket.setSoTimeout(100000);
             clientSocket.receive(receivePacket);
             
             byte[] data = receivePacket.getData();

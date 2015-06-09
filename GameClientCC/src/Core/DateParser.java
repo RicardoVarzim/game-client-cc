@@ -81,7 +81,7 @@ public class DateParser {
 
         String data = "";
         for (Object item : list) {
-            data = data +";"+ (String) item;
+            data = data + (String) item + ";";
         }
         return data.getBytes();
     }
