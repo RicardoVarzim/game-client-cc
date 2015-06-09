@@ -122,6 +122,18 @@ public class CommandFactory {
         return command;
     }
     
+    public PDU RetransmitGame(String game){
+        ArrayList list = new ArrayList<String>();
+        list.add(game);
+        
+        byte[] listResult = dateParser.parserToByte(list);
+        
+        PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)14,(byte)3,(short)listResult.length, listResult);
+        return command;
+    }
+    
+    
+    
     public PDU List_ranking() {
         PDU command = new PDU((byte)0,(byte)0,(short)userID,(byte)13,(byte)0,(short)0);
         return command;

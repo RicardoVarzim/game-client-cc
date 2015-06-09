@@ -28,18 +28,21 @@ public class AcceptChallenge implements ClientOrder {
 
     @Override
     public void execute() {
+        Menu menu = new Menu();
         String temp = message.getFields().get(0);
         if(temp.matches("0")){
             System.out.println("Desafio aceite!");
-             //Perguntar se quer ficar em espera?
+            //Perguntar se quer ficar em espera?
             //Pedido para obter jogo
+            business.retransmitGame(message.getFields().get(1));
+            
+            menu.waitForGame();
+        }
+        else{
+            System.out.println("Erro na aceitação do desafio!");
+            menu.menu2();
         }
             
-        else
-            System.out.println("Erro na aceitação do desafio!");
-        
-        Menu menu = new Menu();
-        menu.waitForMatch();
     }
     
 }

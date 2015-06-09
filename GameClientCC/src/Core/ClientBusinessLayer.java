@@ -13,16 +13,15 @@ public class ClientBusinessLayer {
     //staticClasses
     static UDPClient udpClient;
     //GlobalVars
-    private GameBO _gameBO;
     private UserBE _userBE;
     private GameBE _nextGame;
- 
+    private QuestionBO _questions;
     
     //make the constructor private so that this class cannot be instantiated
     private ClientBusinessLayer(){
-        this._gameBO = new GameBO();
         this._userBE = new UserBE();
         this._nextGame = null;
+        this._questions = new QuestionBO();
     }
 
     //Get the only object available
@@ -123,6 +122,12 @@ public class ClientBusinessLayer {
     public void list_ranking(){
         CommandFactory factory = new CommandFactory();
         udpClient = new UDPClient(factory.List_ranking());
+        new Thread(udpClient).start();
+    }
+
+    public void retransmitGame(String game) {
+        CommandFactory factory = new CommandFactory();
+        udpClient = new UDPClient(factory.RetransmitGame(game));
         new Thread(udpClient).start();
     }
 }

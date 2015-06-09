@@ -37,7 +37,7 @@ public class Menu {
 
         in.nextLine();
         clrScreen();
-        out.println("*** Menu Principal ***");
+        out.println("------------------- Menu Principal -------------------");
         out.println();
         out.println("1-Login");
         out.println("2-Registar");
@@ -70,7 +70,7 @@ public class Menu {
         out.println();
             in.nextLine();
             clrScreen();
-            out.println("*** Menu Principal ***");
+            out.println("------------------- Menu Principal -------------------");
             out.println();
             out.println("1-Criar novo desafio");
             out.println("2-Listar os desafios atuais");
@@ -118,7 +118,7 @@ public class Menu {
         String pass;
 
         clrScreen();
-        out.println("*** Login ***");
+        out.println("------------------- Login -------------------");
         out.println();
         out.print("\nNickname: ");
         name = in.nextLine();
@@ -135,7 +135,7 @@ public class Menu {
         String pass;
 
         clrScreen();
-        out.println("*** Registar ***");
+        out.println("------------------- Registar -------------------");
         out.println();
         out.println("Introduza os seus dados:");
 
@@ -160,7 +160,7 @@ public class Menu {
         int ano, mes, dia, hour, min, seg;
 
         clrScreen();
-        out.println("*** Criar novo desafio ***");
+        out.println("------------------- Criar novo desafio -------------------");
         out.println();
         out.print("Introduza o nome do desafio: ");
         nome = in.nextLine();
@@ -213,7 +213,7 @@ public class Menu {
 
     private void listChallenge() {
         clrScreen();
-        out.println("*** Lista de Desafios ***");
+        out.println("------------------- Lista de Desafios -------------------");
         out.println();
 
         business.list_challenges();
@@ -224,7 +224,7 @@ public class Menu {
         String nome, data, hora;
 
         clrScreen();
-        out.println("*** Entrar num Desafio ***");
+        out.println("------------------- Entrar num Desafio -------------------");
         out.println();
         out.print("Introduza o nome do desafio: ");
 
@@ -241,7 +241,7 @@ public class Menu {
         business.accept_challenge(nome);
     }
 
-    public void waitForMatch() {
+    public void waitForGame() {
         out.println("À espera que o desafio começe...");
 
         GameBE game = business.getGame();
